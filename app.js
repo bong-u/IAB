@@ -1,11 +1,17 @@
 const express = require('express');
-
+const http = require('http')
+const bodyParser = require('body-parser');
 const app = express();
 
-app.listen(8181, function() {
-    console.log('express on 8181')
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const server = http.createServer(app);
+const PORT = 8181;
+
+const indexRouter = require('./router/index');
+
+server.listen(PORT, function() {
+    console.log('Sever running on :', PORT)
 });
 
-app.get('/', function(req, res) {
-    res.send('<h1>hello express</h1>')
-})
+app.use('/index', indexRouter);
