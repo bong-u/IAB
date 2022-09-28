@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+}
+
+header {
+    padding : 50px; 
+}
+
+form#loginForm {
+    padding : 0 150px;
+}
+form#loginForm > div {
+    margin : 20px 0;
+}
