@@ -8,23 +8,22 @@
     <link rel="stylesheet" type="text/css" href="/css/login.css">
   </head>
   <body>
-    <div class="container">
-      <header>
+    <div class="py-5 my-5 text-center">
+      <header class="py-5">
         <h1>한눈에가계부</h1>
       </header> 
-      <section>
+      <section class="text-center">
         <form id="loginForm">
-          <div class="row">
-            <label>ID</label>
+          <div class="my-4 form-floating">
+            <input type="email" class="form-control" id="floatingEmail" placeholder="email">
+            <label for="floatingEmail">Email</label>
           </div>
-          <div class="row">
-            <input type="text">
+          <div class="my-4 form-floating">
+            <input type="password" class="form-control" id="floatingPw" placeholder="password">
+            <label for="floatingPw">Password</label>
           </div>
-          <div class="row">
-            <label>PASSWORD</label>
-          </div>
-          <div class="row">
-            <input type="password">
+          <div class="my-4">
+            <input type="submit" class="w-100 btn btn-lg btn-dark" value="Login">
           </div>
         </form>
       </section>
