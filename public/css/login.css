@@ -1,7 +1,13 @@
 body {
     display: flex;
     justify-content: center;
+    font-family : Malang;
 }
 form#loginForm {
     max-width: 330px;
+}
+
+@font-face {
+  font-family: 'Malang';
+  src: URL('../fonts/HancomMalangMalang-Regular.ttf');
 }
