@@ -12,10 +12,10 @@ app.set('views', './views');
 const server = http.createServer(app);
 const PORT = 8001;
 
-const loginRouter = require('./router/login');
+const router = require('./router/login');
 
 server.listen(PORT, function() {
     console.log('Sever running on :', PORT)
 });
 
-app.use('/', loginRouter);
+app.use('/', router);
