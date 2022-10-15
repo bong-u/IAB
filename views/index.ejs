@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <%- include('./head') %>
+    <head>
+        <%- include('./head') %>
+    </head>
     <body> 
         <%- include('./topbar') %>
         
         <main class="container-fluid row">
             <%- include('./sidebar') %>
             <section class="ms-sm-auto col-md-9 col-lg-10 px-md-4">
+                <%- include('./'+routerName) %>
             </section>
         </main>
     </body>
