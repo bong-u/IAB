@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <%- include('./head') %>
+        <%- include('base/head') %>
     </head>
     <body> 
-        <%- include('./topbar') %>
+        <%- include('base/topbar') %>
         
         <main class="container-fluid row">
-            <%- include('./sidebar') %>
+            <%- include('base/sidebar') %>
             <section class="ms-sm-auto col-md-9 col-lg-10 px-md-4">
-                <%- include('./'+routerName) %>
+                <%- include('content/'+routerName) %>
             </section>
         </main>
     </body>
