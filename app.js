@@ -12,7 +12,7 @@ app.set('views', './views');
 const server = http.createServer(app);
 const PORT = 8001;
 
-const router = require('./router/login');
+const router = require('./router/router');
 
 server.listen(PORT, function() {
     console.log('Sever running on :', PORT)
