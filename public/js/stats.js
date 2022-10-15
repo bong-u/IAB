@@ -27,10 +27,25 @@ const data = {
         backgroundColor: ['#CCF3EE', '#FFD1D1', '#C8DBBE'],
     }],
     labels: ['술값','식비','생활비'],
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        size: 16,
+                        family: "'Malang'",
+                    }
+                }
+            }
+        }
+    },
 };
 
-new Chart(mychart, {
+Chart.defaults.global.defaultFontColor = "#000000";
+Chart.defaults.global.defaultFontFamily = 'Malang';
+const chart = new Chart(mychart, {
     type: 'pie',
     data: data,
     options: {}
-}); 
+});
