@@ -7,5 +7,8 @@ router.get('/login', (req, res) => {
 router.get('/', (req, res) => {
     res.render('index', { routerName : 'main'} );
 });
+router.get('/asset', (req, res) => {
+    res.render('index', { routerName : 'asset'} );
+});
 
 module.exports = router;
