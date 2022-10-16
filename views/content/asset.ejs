@@ -5,8 +5,37 @@
         <p><%= item.name %></p><p><%= item.money %>원</p>
     </div>
     <% }) %>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #DDDDDD"">
+    <div id="open_modal_btn" class="asset-div p-4 text-center shadow" style="background-color: #DDDDDD"">
         <img class="asset-icon p-1 mb-2" src="images/add.png" alt="">
         <p class="my-3">자산 추가</p>
     </div>
 </div>
+
+<div id="add_asset_modal" class="modal fade">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <button id="close_modal_btn" type="button" class="btn-close p-3" aria-label="Close"></button>
+        <form class="d-flex flex-wrap p-5 mx-5 gap-3">
+            <input type="text" class="form-control" placeholder="이름">
+            <select name="type" id="asset-type" class="form-select">
+                <option value="">--- 자산 형태 선택 ---</option>
+                <option value="0">통장</option>
+                <option value="1">카드</option>
+                <option value="2">간편결제</option>
+            </select>
+            <input type="text" class="form-control" placeholder="금액">
+            <div class="d-flex w-100 justify-content-center gap-3 select-scale">
+                <% color_list = [ '#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD'] %>
+                <% color_list.forEach(function(item, index){ %>
+                    <input type="radio" name="select_asset" id="color_<%= index %>" class="btn-check">
+                    <label class="btn p-2" for="color_<%= index %>" style="background-color:<%= item %>"></label>
+                <% }) %>
+            </div>
+            <input type="button" class="btn my-3 mx-auto" value="추가">
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+  
+<script type="text/javascript" src="/js/asset.js"></script>
