@@ -9,6 +9,7 @@ const asset_list = [
     { name: "Asset6", money: "250",     type: "payment", color: "#F0D9FF"
     },
 ];
+const expense_type = ['식비', '교통비', '공과금', '술'];
 
 router.get('/login', (req, res) => {
     res.render('login');
@@ -23,7 +24,11 @@ router.get('/stats', (req, res) => {
     res.render('index', { routerName : 'stats'} );
 });
 router.get('/add_item', (req, res) => {
-    res.render('index', { routerName : 'add_item', asset_list : asset_list} );
+    res.render('index', {
+        routerName : 'add_item',
+        asset_list : asset_list,
+        expense_type : expense_type,
+    } );
 });
 
 module.exports = router;
