@@ -3,8 +3,10 @@
     <head>
         <%- include('base/head') %>
     </head>
-    <body class="d-flex flex-column"> 
-        <%- include('base/topbar') %>
+    <body class="d-flex flex-column">
+        <header class="navbar sticky-top border-bottom justify-content-start flex-nowrap gap-5 p-0 bg-light">
+            <%- include('base/topbar') %>
+        </header>
         
         <main class="d-flex">
             <%- include('base/sidebar') %>
