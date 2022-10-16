@@ -13,5 +13,8 @@ router.get('/asset', (req, res) => {
 router.get('/stats', (req, res) => {
     res.render('index', { routerName : 'stats'} );
 });
+router.get('/add_item', (req, res) => {
+    res.render('index', { routerName : 'add_item'} );
+});
 
 module.exports = router;
