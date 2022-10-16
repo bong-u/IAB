@@ -24,6 +24,17 @@ table {
 tr:hover {
     background-color : rgb(240 225 97 / 50%);
 }
+input:focus {
+    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%) !important;
+}
+.select-scale > input.btn-check:checked + label {
+    transform: scale(1.1);
+    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
+}
+.select-bg > input.btn-check:checked + label {
+    background-color : #f0e161;
+    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
+}
 /* ----- common style ----- */
 
 
@@ -69,22 +80,13 @@ section {
     border-radius : 32px;
     border: 2px solid black;
 }
+.btn-close {
+    margin: 0.5rem 0.5rem -2.5rem auto;
+}
 /* ----- asset.ejs ----- */
 
 /* ----- stats.ejs ----- */
-#select-type > input.btn-check:checked + label {
-    background-color : #f0e161;
-    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
-}
-
-#add-item-form input:focus {
-    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
-}
 /* ----- stats.ejs ----- */
 
-/* ----- add_item.ejs ----- */
-#select-asset > input.btn-check:checked + label {
-    transform: scale(1.1);
-    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
-}
-/* ----- add_item.ejs ----- */
+/* ----- add.ejs ----- */
+/* ----- add.ejs ----- */
