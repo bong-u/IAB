@@ -1,28 +1,10 @@
 <div class="d-flex w-100 px-5 gap-5 flex-wrap justify-content-center">
-    <div class="asset-div p-4 text-center shadow" style="background-color: #FFD1D1">
-        <img class="asset-icon p-1 mb-2" src="images/payment.png" alt="">
-        <p>온통대전</p><p>1500원</p>
+    <% asset_list.forEach(function(item, index){ %>
+    <div class="asset-div p-4 text-center shadow" style="background-color: <%= item.color %>">
+        <img class="asset-icon p-1 mb-2" src="images/<%= item.type %>.png" alt="">
+        <p><%= item.name %></p><p><%= item.money %>원</p>
     </div>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #CCF3EE">
-        <img class="asset-icon p-1 mb-2" src="images/bankbook.png" alt="">
-        <p>통장A</p><p>10000원</p>
-    </div>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #C8DBBE">
-        <img class="asset-icon p-1 mb-2" src="images/card.png" alt="">
-        <p>나라사랑카드</p><p>7000원</p>
-    </div>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #F0D9FF">
-        <img class="asset-icon p-1 mb-2" src="images/card.png" alt="">
-        <p>1</p><p>1원</p>
-    </div>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #F9F7CF">
-        <img class="asset-icon p-1 mb-2" src="images/card.png" alt="">
-        <p>2</p><p>2원</p>
-    </div>
-    <div class="asset-div p-4 text-center shadow" style="background-color: #9ADCFF">
-        <img class="asset-icon p-1 mb-2" src="images/card.png" alt="">
-        <p>4</p><p>4원</p>
-    </div>
+    <% }) %>
     <div class="asset-div p-4 text-center shadow" style="background-color: #DDDDDD"">
         <img class="asset-icon p-1 mb-2" src="images/add.png" alt="">
         <p class="my-3">자산 추가</p>
