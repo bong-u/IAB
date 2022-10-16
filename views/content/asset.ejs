@@ -15,23 +15,22 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border">
         <button id="close_modal_btn" type="button" class="btn-close p-3" aria-label="Close"></button>
-        <form class="d-flex flex-wrap p-5 mx-5 gap-3">
-            <input type="text" class="form-control" placeholder="이름">
-            <select name="type" id="asset-type" class="form-select border">
+        <form id="add_asset_form" class="d-flex flex-wrap p-5 mx-5 gap-3" method="post">
+            <input type="text" name="name" class="form-control" placeholder="이름" required>
+            <select name="type" id="asset-type" class="form-select border" required>
                 <option value="">--- 자산 형태 선택 ---</option>
                 <option value="0">통장</option>
                 <option value="1">카드</option>
                 <option value="2">간편결제</option>
             </select>
-            <input type="text" class="form-control" placeholder="금액">
+            <input id="input_money" type="text" name="money" class="form-control" placeholder="금액" required>
             <div class="d-flex w-100 justify-content-center gap-3 select-scale">
-                <% color_list = [ '#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD'] %>
-                <% color_list.forEach(function(item, index){ %>
-                    <input type="radio" name="select_asset" id="color_<%= index %>" class="btn-check">
-                    <label class="btn p-2" for="color_<%= index %>" style="background-color:<%= item %>"></label>
+                <% asset_color.forEach( (item, index) => { %>
+                    <input type="radio" name="color" value="<%=item%>" id="color_<%= index %>" class="btn-check" reequired>
+                    <label class="btn p-2" for="color_<%=index%>" style="background-color:<%=item%>"></label>
                 <% }) %>
             </div>
-            <input type="button" class="btn my-3 mx-auto" value="추가">
+            <input type="submit" class="btn my-3 mx-auto" value="추가">
         </form>
     </div>
     </div>

@@ -1,8 +1,10 @@
 const db = require('../db/db.js');
+const ASSET_COLOR =  ['#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD'];
+const ASSET_TYPE = ['account', 'card', 'payment'];
+
+exports.ASSET_COLOR = ASSET_COLOR;
 
 exports.getAsset = async () => {
-    const ASSET_TYPE = ['account', 'card', 'payment'];
-    const ASSET_COLOR = ['#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD'];
     const QUERY = 'select * from asset';
     
     db.serialize();
