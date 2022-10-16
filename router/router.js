@@ -23,9 +23,9 @@ router.get('/asset', (req, res) => {
 router.get('/stats', (req, res) => {
     res.render('index', { routerName : 'stats'} );
 });
-router.get('/add_item', (req, res) => {
+router.get('/add', (req, res) => {
     res.render('index', {
-        routerName : 'add_item',
+        routerName : 'add',
         asset_list : asset_list,
         expense_type : expense_type,
     } );
