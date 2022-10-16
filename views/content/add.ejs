@@ -1,6 +1,6 @@
 <form id="add-form" class="row p-3">
     <div class="col-lg-8 d-flex flex-column gap-3">
-        <div id="select-type" class="btn-group d-table mx-auto">
+        <div class="btn-group d-table mx-auto select-bg">
             <input type="radio" name="select" id="income" class="btn-check" checked>
             <label class="btn" for="income">지출</label>
             <input type="radio" name="select" id="expense" class="btn-check">
@@ -8,7 +8,7 @@
         </div>
         <div class="border">
             <label class="d-block text-center my-1 fs-5">자산선택</label>
-            <div id="select-asset" class="d-flex gap-2 flex-wrap p-3 justify-content-center">
+            <div id="select-asset" class="d-flex gap-2 flex-wrap p-3 justify-content-center select-scale">
                 <% asset_list.forEach(function(item, index){ %>
                 <input type="radio" name="select_asset" id="<%= item.name %>" class="btn-check">
                 <label class="btn" for="<%= item.name %>" style="background-color:  <%= item.color %>"><%= item.name %></label>
@@ -17,7 +17,7 @@
         </div>
         <div class="border">
             <label class="d-block text-center my-1 fs-5">분류</label>
-            <div id="select-type" class="d-flex gap-2 flex-wrap p-3 justify-content-center">
+            <div id="select-type" class="d-flex gap-2 flex-wrap p-3 justify-content-center select-scale">
                 <% expense_type.forEach(function(item, index){ %>
                 <input type="radio" name="select_asset" id="<%= item %>" class="btn-check">
                 <label class="btn" for="<%= item %>"><%= item%></label>
