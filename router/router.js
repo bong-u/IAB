@@ -10,11 +10,15 @@ router.get('/login', (req, res) => {
 router.get('/', (req, res) => {
     res.render('index', { routerName : 'home'} );
 });
-router.get('/asset', ct.getAsset);
+router.get('/asset', async (req, res) => {
+    const asset_list = await ct.getAsset();
+    res.render('index', { routerName : 'asset', asset_list : asset_list} );
+});
 router.get('/stats', (req, res) => {
     res.render('index', { routerName : 'stats'} );
 });
-router.get('/add', (req, res) => {
+router.get('/add', async (req, res) => {
+    const asset_list = await ct.getAsset();
     res.render('index', {
         routerName : 'add',
         asset_list : asset_list,
