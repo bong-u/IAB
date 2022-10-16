@@ -3,12 +3,12 @@
     <head>
         <%- include('base/head') %>
     </head>
-    <body> 
+    <body class="d-flex flex-column"> 
         <%- include('base/topbar') %>
         
-        <main class="container-fluid row">
+        <main class="d-flex">
             <%- include('base/sidebar') %>
-            <section class="ms-sm-auto col-md-9 col-lg-10 px-md-4 pt-5">
+            <section class="ms-sm-10 col-md-9 col-lg-9 col-lg-10 p-5">
                 <%- include('content/'+routerName) %>
             </section>
         </main>
