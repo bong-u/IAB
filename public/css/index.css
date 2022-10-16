@@ -9,7 +9,7 @@ body {
 }
 a { cursor : pointer; }
 
-.border, .btn, .border-end, .border-bottom {
+.border, .btn, .border-end, .border-bottom, input {
     border-width : 2px!important;
     border-color : black!important;
 }
@@ -77,14 +77,14 @@ section {
     box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
 }
 
-#add-item-form > input {
-    border : none;
-}
-#add-item-form > input:focus {
-    border : none;
+#add-item-form input:focus {
     box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
 }
 /* ----- stats.ejs ----- */
 
 /* ----- add_item.ejs ----- */
+#select-asset > input.btn-check:checked + label {
+    transform: scale(1.1);
+    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
+}
 /* ----- add_item.ejs ----- */
