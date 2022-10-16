@@ -3,13 +3,13 @@
     <head>
         <%- include('base/head') %>
     </head>
-    <body class="d-flex flex-column">
-        <header class="navbar sticky-top border-bottom justify-content-start flex-nowrap gap-5 p-0 bg-light">
+    <body class="d-flex flex-column flex-nowrap">
+        <header class="d-flex border-bottom flex-wrap sticky-top bg-light">
             <%- include('base/topbar') %>
         </header>
 
         <main class="d-flex">
-            <aside id="sidebar" class="col-md-3 col-lg-3 col-xl-2 d-md-block bg-light sidebar collapse border-end px-3">
+            <aside id="sidebar" class="col-md-3 col-lg-3 col-xl-2 d-md-block bg-light sidebar collapse px-3 border-end">
                 <%- include('base/sidebar') %>
             </aside>
             <section class="col-sm-12 col-md-9 col-lg-9 col-xl-10 p-5">

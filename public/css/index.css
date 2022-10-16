@@ -7,9 +7,20 @@ body {
     background-color : #f5f5f5;
     overflow-x: hidden;
 }
+#logo-area {
+    border-right : 2px solid transparent;
+    border-bottom : 2px solid black;
+}
+@media (min-width: 576px) {
+    #logo-area {
+        border-right: 2px solid black !important;
+        border-bottom : 2px solid transparent !important;
+    }
+}
 a { cursor : pointer; }
 
-.border, .btn, .border-end, .border-bottom, input {
+.border, .border-end, .border-bottom,
+.btn, input {
     border-width : 2px!important;
     border-color : black!important;
 }
