@@ -5,7 +5,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 router.get('/', (req, res) => {
-    res.render('index', { routerName : 'main'} );
+    res.render('index', { routerName : 'home'} );
 });
 router.get('/asset', (req, res) => {
     res.render('index', { routerName : 'asset'} );
