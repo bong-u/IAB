@@ -72,8 +72,19 @@ section {
 /* ----- asset.ejs ----- */
 
 /* ----- stats.ejs ----- */
-#income-expense-select > input:checked + label {
-    background-color : #f0e161; 
+#select-type > input.btn-check:checked + label {
+    background-color : #f0e161;
+    box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
+}
+
+#add-item-form > input {
+    border : none;
+}
+#add-item-form > input:focus {
+    border : none;
     box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
 }
 /* ----- stats.ejs ----- */
+
+/* ----- add_item.ejs ----- */
+/* ----- add_item.ejs ----- */
