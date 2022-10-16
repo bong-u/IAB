@@ -1,24 +1,5 @@
 'use strict';
 
-let current_state = 0;
-const income_btn = document.getElementById('income_btn');
-const expense_btn = document.getElementById('expense_btn');
-const btn_group = document.getElementById('btn_group');
-
-const switch_stats = (event) => {
-    const target = event.target;
-    const target_id = parseInt(target.getAttribute('btn-value'));
-    const sibling = target_id ? target.previousElementSibling:  target.nextElementSibling;
-
-    target.classList.add('btn-select');
-    sibling.classList.remove('btn-select');
-
-    current_state = target_id;
-};
-
-btn_group.addEventListener('click', switch_stats);
-
-
 const stats_chart = document.getElementById('stats_chart').getContext('2d');
 
 const data = {
