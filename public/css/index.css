@@ -52,7 +52,7 @@ tr:hover {
 
 /* ----- header.ejs ----- */
 .nav-link {
-    color : black;
+    color : black !important;
     border : 2px solid transparent;
 }
 .nav-select{
