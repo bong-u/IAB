@@ -26,15 +26,15 @@ const data = {
     datasets: [{
         data: [10, 20, 30],
         backgroundColor: ['#CCF3EE', '#FFD1D1', '#C8DBBE'],
+        borderColor: Array.from({length: 3}, () => '#000000'),
     }],
 };
 
 Chart.defaults.global.defaultFontColor = '#000000';
 Chart.defaults.global.defaultFontFamily = 'Malang';
-console.log(Chart.defaults);
 Chart.defaults.global.defaultFontSize = 16;
 const chart = new Chart(stats_chart, {
     type: 'pie',
     data: data,
-    options: {}
+    options: {},
 });
