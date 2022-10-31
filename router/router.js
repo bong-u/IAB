@@ -12,7 +12,15 @@ router.get('/', (req, res) => {
 });
 router.get('/asset', async (req, res) => {
     const asset_list = await ct.getAsset();
-    res.render('index', { routerName : 'asset', asset_list : asset_list} );
+    res.render('index', {
+        routerName : 'asset',
+        asset_color : ct.ASSET_COLOR,
+        asset_list : asset_list
+    });
+});
+router.post('/asset', async (req, res) => {
+    const asset_list = await ct.addAsset(req.body);
+    return;
 });
 router.get('/stats', (req, res) => {
     res.render('index', { routerName : 'stats'} );
