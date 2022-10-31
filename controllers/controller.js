@@ -23,3 +23,25 @@ exports.getAsset = async () => {
          });
     });
 };
+
+exports.addAsset = async (item) => {
+
+    console.log (item);
+    return;
+    
+    db.serialize();
+    // return new Promise(function(resolve,reject){
+    //     db.all(QUERY, function(err, rows){
+    //         if (err) {
+    //             console.log(err);
+    //             res.status(500).send(err.message);
+    //             return;
+    //         }
+    //         rows.forEach((item) => {
+    //             item.type = ASSET_TYPE[item.type];
+    //             item.color = ASSET_COLOR[item.color];
+    //         });
+    //         resolve(rows);
+    //      });
+    // });
+};
