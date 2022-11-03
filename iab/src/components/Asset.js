@@ -1,24 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AddAssetModal from './AddAssetModal';
 
-const Asset = () => {
-  const [assetList, setAssetList] = useState([]);
-  const [assetColorList, setAssetColorList] = useState([]);
+const Asset = ({assetList, assetColorList}) => {
   const [modalFlag, setModalFlag] = useState(false);
-  const gray = '#dddddd';
 
   const openModal = () => { setModalFlag(true); };
   const closeModal = () => { setModalFlag(false); };
-
-
-  useEffect(() => {
-    fetch('http://localhost:3001/asset', { method: 'POST' })
-      .then(res => res.json())
-      .then(data => {
-        setAssetList(data['asset_list']);
-        setAssetColorList(data['asset_color_list'])
-      });
-  }, []);
 
   return (
     <div>
@@ -31,7 +18,7 @@ const Asset = () => {
             </div>
           )
         })}
-        <div id="open_modal_btn" onClick={openModal} className="asset-div p-4 text-center shadow" style={{ backgroundColor: gray }}>
+        <div id="open_modal_btn" onClick={openModal} className="asset-div p-4 text-center shadow" style={{ backgroundColor: ("#dddddd") }}>
           <img className="asset-icon p-1 mb-2" src="images/add.png" alt="" />
           <p className="my-3">자산 추가</p>
         </div>
