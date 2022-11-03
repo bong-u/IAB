@@ -1,12 +1,18 @@
+import { useState } from 'react';
+
 const Stats = () => {
+  const [type, setType] = useState("0");
+  const typeChange = (e) => {
+    setType(e.target.getAttribute('value'));
+  };
   return (
     <div>
       <div className="d-table mx-auto">
         <div className="btn-group mx-auto select-bg">
-          <input type="radio" name="select" id="income" className="btn-check" checked />
-          <label className="btn" for="income">지출</label>
-          <input type="radio" name="select" id="expense" className="btn-check" />
-          <label className="btn" for="expense">수입</label>
+          <input type="radio" checked={type === "0"} className="btn-check" readOnly />
+          <span className="btn" value="0" onClick={typeChange}>지출</span>
+          <input type="radio" checked={type === "1"} className="btn-check" readOnly />
+          <span className="btn" value="1" onClick={typeChange}>수입</span>
         </div>
       </div>
       <div className="row justify-content-center my-3">
