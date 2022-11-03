@@ -1,11 +1,11 @@
-const AddAssetModal = ( {assetColorList, closeModal} ) => {
+const AddAssetModal = ({ assetColorList, closeModal }) => {
   return (
     <div id="add_asset_modal" className="modal fade show">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content border">
           <button onClick={closeModal} id="close_modal_btn" type="button" className="btn-close p-3" aria-label="Close"></button>
           <form id="add_asset_form" className="d-flex flex-wrap p-5 mx-5 gap-3" method="post">
-            <input type="text" name="name" className="form-control" placeholder="이름"/>
+            <input type="text" name="name" className="form-control" placeholder="이름" />
             <select name="type" id="asset-type" className="form-select border" required>
               <option value="">--- 자산 형태 선택 ---</option>
               <option value="0">통장</option>
@@ -14,12 +14,11 @@ const AddAssetModal = ( {assetColorList, closeModal} ) => {
             </select>
             <input id="input_money" type="text" name="money" className="form-control" placeholder="금액" />
             <div className="d-flex w-100 justify-content-center gap-3">
-              { assetColorList.map((color, idx) => {
+              {assetColorList.map((color, idx) => {
                 return (
-                  <div key={"color"+idx} className="select-scale">
-                    <input type="radio" name="color" value={idx} id={"color" + idx} className="btn-check" required/>
+                  <div key={"color" + idx} className="select-scale">
+                    <input type="radio" name="color" value={idx} id={"color" + idx} className="btn-check" required />
                     <span className="btn p-2" style={{ backgroundColor: color }}></span>
-                    {/* for="color_<%=index%>" */}
                   </div>
                 )
               })}
