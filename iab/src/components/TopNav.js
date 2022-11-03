@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const TopNav = () => {
   return (
@@ -9,16 +9,16 @@ const TopNav = () => {
       <div className="col-12 col-sm-8 col-md-9 col-lg-9 col-xl-10">
         <ul className="nav gap-3 justify-content-center flex-nowrap">
           <li className="nav-item my-3">
-            <Link to="/" className="nav-link">한눈에</Link>
+            <NavLink to="/" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>한눈에</NavLink>
           </li>
           <li className="nav-item my-3">
-            <Link to="/asset" className="nav-link">자산</Link>
+            <NavLink to="/asset" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>자산</NavLink>
           </li>
           <li className="nav-item my-3">
-            <Link to="/stats" className="nav-link">통계</Link>
+            <NavLink to="/stats" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>통계</NavLink>
           </li>
           <li className="nav-item my-3">
-            <Link to="/add" className="nav-link">거래추가</Link>
+            <NavLink to="/add" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>거래추가</NavLink>
           </li>
         </ul>
       </div>
