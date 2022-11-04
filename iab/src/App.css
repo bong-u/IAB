@@ -28,7 +28,7 @@ tr:hover {
 #close_modal_btn:active, input:focus, select:focus {
     box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%) !important;
 }
-.select-scale > input.btn-check:checked + span {
+.select-scale:has(input:checked) {
     transform: scale(1.1);
     box-shadow : 0 0 0 0.25rem rgb(240 225 97 / 50%);
 }
