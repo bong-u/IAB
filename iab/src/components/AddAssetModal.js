@@ -12,7 +12,7 @@ const AddAssetModal = ({ assetColorList, closeModal }) => {
   const handleColor = ({target}) => {
     setColor(parseInt(target.getAttribute('value')));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name);
@@ -25,7 +25,7 @@ const AddAssetModal = ({ assetColorList, closeModal }) => {
       <div className="modal-dialog modal-dialog-centered">  
         <div className="modal-content border">
           <button onClick={closeModal} id="close_modal_btn" type="button" className="btn-close p-3" aria-label="Close"></button>
-          <form id="add_asset_form" className="d-flex flex-wrap p-5 mx-5 gap-3" onSubmit={handleSubmit}>
+          <form id="add_asset_form" onSubmit={handleSubmit} className="d-flex flex-wrap p-5 mx-5 gap-3">
             <input type="text" onChange={handleName} className="form-control" placeholder="이름" required/>
             <select name="type" id="asset-type" onChange={handleType} className="form-select border" required>
               <option value="">--- 자산 형태 선택 ---</option>
