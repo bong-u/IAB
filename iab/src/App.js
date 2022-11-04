@@ -7,8 +7,7 @@ const App = () => {
     <div className="h-100">
       <BrowserRouter>
         <Routes>
-          <Route path="/*" element={<Main/>}>
-          </Route>
+          <Route path="/*" element={<Main/>}/>
           <Route path="/login" element={<Login/>}/>
         </Routes>
       </BrowserRouter>
