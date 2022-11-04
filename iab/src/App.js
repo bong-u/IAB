@@ -10,16 +10,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
-  
   const [assetList, setAssetList] = useState([]);
   const [assetColorList, setAssetColorList] = useState([]);
+  const [expenseTypeList, setExpenseTypeList] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001', { method: 'POST' })
       .then(res => res.json())
       .then(data => {
         setAssetList(data['asset_list']);
-        setAssetColorList(data['asset_color_list'])
+        setAssetColorList(data['asset_color_list']);
+        setExpenseTypeList(data['expense_type_list']);
       });
   }, []);
 
@@ -36,7 +37,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/asset" element={<Asset assetList={assetList} assetColorList={assetColorList}/>} />
               <Route path="/stats" element={<Stats />} />
-              <Route path="/add" element={<Add />} />
+              <Route path="/add" element={<Add assetList={assetList} expenseTypeList={expenseTypeList}/>} />
             </Routes>
           </section>
         </main>
