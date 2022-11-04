@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Add = ({ assetList, expenseTypeList }) => {
   const [type, setType] = useState('0');
@@ -18,9 +18,6 @@ const Add = ({ assetList, expenseTypeList }) => {
     setSelectExpense(parseInt(target.getAttribute('value')));
   };
 
-  // useEffect(() => {
-  //   document.querySelectorAll('input[type=input_date]').value = new Date().toISOString().slice(0, 7);
-  // }, []);
   return (
     <form id="add-form" className="row p-3 g-5">
       <div className="col-lg-8 d-flex flex-column gap-3">
