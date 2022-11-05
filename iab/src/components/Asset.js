@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import AddAssetModal from './AddAssetModal';
 
-const Asset = ({assetList, assetColorList}) => {
+const Asset = ({ assetList, assetColorList }) => {
+  // modal의 상태 0:hide, 1:show
   const [modalFlag, setModalFlag] = useState(false);
 
-  const openModal = () => { setModalFlag(true); };
+  const openModal = () => { setModalFlag(true); console.log(modalFlag) };
   const closeModal = () => { setModalFlag(false); };
 
   return (
@@ -18,12 +19,14 @@ const Asset = ({assetList, assetColorList}) => {
             </div>
           )
         })}
+        {/* onClick -> openModal 트리거 */}
         <div id="open_modal_btn" onClick={openModal} className="asset-div p-4 text-center shadow" style={{ backgroundColor: ("#dddddd") }}>
           <img className="asset-icon p-1 mb-2" src="images/add.png" alt="" />
           <p className="my-3">자산 추가</p>
         </div>
       </div>
-      <div className={modalFlag ? '' : 'hide'}>
+      {/* modalFlag에 따라 show or hide */}
+      <div className={modalFlag ? 'd-block' : 'd-none'}>
         <AddAssetModal assetColorList={assetColorList} closeModal={closeModal} ></AddAssetModal>
       </div>
     </div>

@@ -1,6 +1,6 @@
 const Login = () => {
   return (
-  <div className="py-5 my-5">
+    <div className="py-5 my-5">
       <header className="py-5 text-center">
         <h1>한눈에가계부</h1>
       </header>

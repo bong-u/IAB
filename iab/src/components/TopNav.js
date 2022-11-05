@@ -9,16 +9,16 @@ const TopNav = () => {
       <div className="col-12 col-sm-8 col-md-9 col-lg-9 col-xl-10">
         <ul className="nav gap-3 justify-content-center flex-nowrap">
           <li className="nav-item my-3">
-            <NavLink to="/" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>한눈에</NavLink>
+            <NavLink to="/" className={({ isActive }) => "nav-link" + (isActive ? " nav-select" : "")}>한눈에</NavLink>
           </li>
           <li className="nav-item my-3">
-            <NavLink to="/asset" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>자산</NavLink>
+            <NavLink to="/asset" className={({ isActive }) => "nav-link" + (isActive ? " nav-select" : "")}>자산</NavLink>
           </li>
           <li className="nav-item my-3">
-            <NavLink to="/stats" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>통계</NavLink>
+            <NavLink to="/stats" className={({ isActive }) => "nav-link" + (isActive ? " nav-select" : "")}>통계</NavLink>
           </li>
           <li className="nav-item my-3">
-            <NavLink to="/add" className={({ isActive }) => "nav-link"+(isActive ? " nav-select" : "")}>거래추가</NavLink>
+            <NavLink to="/add" className={({ isActive }) => "nav-link" + (isActive ? " nav-select" : "")}>거래추가</NavLink>
           </li>
         </ul>
       </div>
