@@ -25,5 +25,9 @@ router.post('/transaction', async (req, res) => {
     console.log (req.body);
     res.send (req.body);
 });
+router.post('/signup', async (req, res) => {
+    console.log (req.body);
+    res.send (req.body);
+});
 
 module.exports = router;
