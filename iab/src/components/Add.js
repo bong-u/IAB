@@ -31,6 +31,15 @@ const Add = ({ assetList, expenseTypeList }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(type, asset, expense, date, content);
+    fetch('http://localhost:3001/transaction', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json'},
+      body: JSON.stringify({ type: type, asset: asset, expense: expense, date: date, content })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log (data);
+      });
   };
 
   return (

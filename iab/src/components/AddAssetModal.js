@@ -15,10 +15,19 @@ const AddAssetModal = ({ assetColorList, closeModal }) => {
     setColor(parseInt(target.getAttribute('value')));
   };
 
-  // 출력만 수행, 서버에 post요청은 아직 구현X
+  // submit post
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name, type, money, color);
+    fetch('http://localhost:3001/asset', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json'},
+      body: JSON.stringify({ name: name, type: type, money: money, color: color })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log (data);
+      });
   };
   return (
     <div id="add_asset_modal" className="modal fade show d-block">

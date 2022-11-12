@@ -5,7 +5,7 @@ const Asset = ({ assetList, assetColorList }) => {
   // modal의 상태 0:hide, 1:show
   const [modalFlag, setModalFlag] = useState(false);
 
-  const openModal = () => { setModalFlag(true); console.log(modalFlag) };
+  const openModal = () => { setModalFlag(true);   };
   const closeModal = () => { setModalFlag(false); };
 
   return (
