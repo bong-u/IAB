@@ -8,9 +8,9 @@ const db = new sqlite3.Database('./db/db.db', sqlite3.OPEN_READWRITE, (err) => {
     }
 });
 
-const drop_asset = 'drop table if exists asset';
+const drop_table = 'drop table if exists user';
 
-const create_asset =`create table if not exists asset(
+const create_asset_table =`create table if not exists asset(
   id integer primary key autoincrement,
   name varchar(20),
   type integer,
@@ -21,11 +21,17 @@ const insert_asset = `insert into asset(name, type, money, color) values
   ('카카오뱅크', 0, 5000, 0),
   ('국민은행', 0, 15000, 2)`;
 
+const create_user_table = `create table if not exists user(
+  id integer primary key autoincrement,
+  username varchar(20) unique,
+  password varchar(64))`; 
+
 
 db.serialize(() => {
-  db.each(drop_asset);
-  db.each(create_asset);
-  db.each(insert_asset);
+  // db.each(drop_table);
+  db.each(create_asset_table);
+  db.each(create_user_table);
+  // db.each(insert_asset);
 });
 
 // const close = () => {

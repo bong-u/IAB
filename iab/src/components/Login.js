@@ -24,7 +24,7 @@ const Login = () => {
       return false;
     }
     if (!pwRegex.test(pw)) {
-      alert('최소 8자리이면서 문자, 숫자, 특수문자 조합의 비밀번호를 입력해주시기 바랍니다.');
+      alert('8-16자리이고 문자, 숫자, 특수문자 조합의 비밀번호를 입력해주시기 바랍니다.');
       return false;
     }
     return true;
@@ -38,27 +38,32 @@ const Login = () => {
         body: JSON.stringify({ id: id, password: pw})
       })
         .then(res => res.json())
-        .then(data => {
-          console.log (data);
-          alert('회원가입에 성공했습니다.');
-        });
+        .then(res => {
+          alert (res.response);
+        })
+        .catch((err) => { console.error(err); });
     }
   };
 
   const handleLogin = () => {
     if (validate()) {
-      fetch('http://localhost:3001/signup', {
+      fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: { 'Content-type': 'application/json'},
         body: JSON.stringify({ id: id, password: pw})
       })
-        .then(res => res.json())
-        .then(data => {
-          sessionStorage.setItem('user', id);
-          navigate('/');
-        });
+        .then((res) => {
+          if(res.status === 200){
+            sessionStorage.setItem('user', id);
+            navigate('/');
+            return
+          }
+          return res.json();
+        })
+        .then((res) => {
+            alert (res.response);
+        })
     }
-
   };
 
   return (
