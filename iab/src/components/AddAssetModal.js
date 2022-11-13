@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AddAssetModal = ({ assetColorList, closeModal }) => {
+const AddAssetModal = ({ token, assetColorList, closeModal }) => {
   // form의 values
   const [name, setName] = useState();
   const [type, setType] = useState();
@@ -21,12 +21,16 @@ const AddAssetModal = ({ assetColorList, closeModal }) => {
     console.log(name, type, money, color);
     fetch('http://localhost:3001/asset', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json'},
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        'Content-type': 'application/json'
+      },
       body: JSON.stringify({ name: name, type: type, money: money, color: color })
     })
       .then(res => res.json())
       .then(data => {
-        console.log (data);
+        alert('자산이 추가되었습니다.');
+        window.location.reload('/');
       });
   };
   return (

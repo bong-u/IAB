@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopNav from './TopNav';
 import SideNav from './SideNav';
@@ -16,25 +16,32 @@ const Main = () => {
   const [expenseTypeList, setExpenseTypeList] = useState([]);
   const sessionStorage = window.sessionStorage;
   const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
 
-  const logoutFunc = () => {
-    sessionStorage.removeItem("user");
+  const logoutFunc = useCallback(() => {
+    sessionStorage.removeItem("token");
     window.location.reload('/');
-  };
+  }, [sessionStorage]);
 
   // 필요한 정보를 한번에 받아서 하위 컴포넌트에 props로 전달
   useEffect(() => {
-    if (sessionStorage.getItem('user') === null)
+    if (token === null)
       navigate('/login');
 
-    fetch('http://localhost:3001', { method: 'POST' })
-      .then(res => res.json())
+    fetch('http://localhost:3001', {
+      method: 'POST',
+      headers: {"Authorization" : `Bearer ${token}`}
+    })
+      .then(res => {
+        if (res.status === 401) logoutFunc();
+        return res.json()
+      })
       .then(data => {
         setAssetList(data['asset_list']);
         setAssetColorList(data['asset_color_list']);
         setExpenseTypeList(data['expense_type_list']);
-      });
-  }, [sessionStorage, navigate]);
+      })
+  }, [token, navigate, logoutFunc]);
 
 
   return (
@@ -47,7 +54,7 @@ const Main = () => {
         <section className="col-sm-12 col-md-9 col-lg-9 col-xl-10 p-5">
           <Routes>
             <Route path="" element={<Home />} />
-            <Route path="asset" element={<Asset assetList={assetList} assetColorList={assetColorList} />} />
+            <Route path="asset" element={<Asset token={token} assetList={assetList} assetColorList={assetColorList} />} />
             <Route path="stats" element={<Stats />} />
             <Route path="add" element={<Add assetList={assetList} expenseTypeList={expenseTypeList} />} />
           </Routes>

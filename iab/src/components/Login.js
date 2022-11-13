@@ -52,16 +52,14 @@ const Login = () => {
         headers: { 'Content-type': 'application/json'},
         body: JSON.stringify({ id: id, password: pw})
       })
-        .then((res) => {
-          if(res.status === 200){
-            sessionStorage.setItem('user', id);
+        .then(res =>  res.json())
+        .then(res => {
+          if(res.result === 'ok'){
+            sessionStorage.setItem('token', res.token);
             navigate('/');
-            return
-          }
-          return res.json();
-        })
-        .then((res) => {
+          } else {
             alert (res.response);
+          }
         })
     }
   };

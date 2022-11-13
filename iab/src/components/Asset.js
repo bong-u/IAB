@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AddAssetModal from './AddAssetModal';
 
-const Asset = ({ assetList, assetColorList }) => {
+const Asset = ({ token, assetList, assetColorList }) => {
   // modal의 상태 0:hide, 1:show
   const [modalFlag, setModalFlag] = useState(false);
 
@@ -27,7 +27,7 @@ const Asset = ({ assetList, assetColorList }) => {
       </div>
       {/* modalFlag에 따라 show or hide */}
       <div className={modalFlag ? 'd-block' : 'd-none'}>
-        <AddAssetModal assetColorList={assetColorList} closeModal={closeModal} ></AddAssetModal>
+        <AddAssetModal token={token} assetColorList={assetColorList} closeModal={closeModal} ></AddAssetModal>
       </div>
     </div>
   );

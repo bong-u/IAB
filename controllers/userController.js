@@ -26,7 +26,7 @@ exports.searchUser = async (id, password, next) => {
             const isUser = await bcrypt.compare(password, row[0].password);
     
             if (isUser)
-                resolve(true);
+                resolve(row[0].id);
             else
                 resolve(false);
         });
