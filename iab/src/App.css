@@ -1,6 +1,10 @@
 /* ----- common style ----- */
 html, body, #root{
-    height: 100%;
+    height : 100%;
+    overflow : hidden;
+}
+section {
+    overflow: auto;
 }
 body {
     font-family : Malang;
