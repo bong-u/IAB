@@ -50,10 +50,10 @@ const Add = ({ token, assetList, expenseTypeList }) => {
       <div className="col-lg-8 d-flex flex-column gap-3">
         {/* expense/income switch */}
         <div className="btn-group d-table mx-auto select-bg">
-          <input type="radio" checked={type === "0"} className="btn-check" readOnly />
-          <span className="btn" value="0" onClick={typeChange}>지출</span>
-          <input type="radio" checked={type === "1"} className="btn-check" readOnly />
-          <span className="btn" value="1" onClick={typeChange}>수입</span>
+          <input type="radio" checked={type === 0} className="btn-check" readOnly />
+          <span className="btn" value={0} onClick={typeChange}>지출</span>
+          <input type="radio" checked={type === 1} className="btn-check" readOnly />
+          <span className="btn" value={1} onClick={typeChange}>수입</span>
         </div>
         {/* asset */}
         <div className="border">
