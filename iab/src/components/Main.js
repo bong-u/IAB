@@ -27,20 +27,21 @@ const Main = () => {
   useEffect(() => {
     if (token === null)
       navigate('/login');
-
-    fetch('http://localhost:3001', {
-      method: 'POST',
-      headers: {"Authorization" : `Bearer ${token}`}
-    })
-      .then(res => {
-        if (res.status === 401) logoutFunc();
-        return res.json()
+    else {
+      fetch('http://localhost:3001', {
+        method: 'POST',
+        headers: {"Authorization" : `Bearer ${token}`}
       })
-      .then(data => {
-        setAssetList(data['asset_list']);
-        setAssetColorList(data['asset_color_list']);
-        setExpenseTypeList(data['expense_type_list']);
-      })
+        .then(res => {
+          if (res.status === 401) logoutFunc();
+          return res.json()
+        })
+        .then(data => {
+          setAssetList(data['asset_list']);
+          setAssetColorList(data['asset_color_list']);
+          setExpenseTypeList(data['expense_type_list']);
+        })
+    }
   }, [token, navigate, logoutFunc]);
 
 
