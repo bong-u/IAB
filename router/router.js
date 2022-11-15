@@ -14,12 +14,12 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     const user_id = tokenController.verifyToken(req.header('Authorization'));
 
-    const data = {
-        asset_color_list : controller.ASSET_COLOR,
-        expense_type_list : expense_type_list,
-    };
     if (user_id) {
-        data['asset_list'] = await controller.getAsset(user_id)
+        const data = {
+            asset_color_list : controller.ASSET_COLOR,
+            asset_list : await controller.getAsset(user_id),
+            expense_type_list : expense_type_list,
+        };
         res.send(data);
     }
     else { return res.status(401).send({result: 'Unauthorized'}); }
@@ -36,8 +36,14 @@ router.post('/asset', async (req, res) => {
     else { return res.status(401).send({result: 'Unauthorized'}); }
 });
 router.post('/transaction', async (req, res) => {
-    console.log (req.body);
-    res.send (req.body);
+    const user_id = tokenController.verifyToken(req.header('Authorization'));
+    const item = req.body;
+
+    if (user_id) {
+        await controller.addTransaction(user_id, item);
+        // return res.send (user_id, item);
+    }
+    else { return res.status(401).send({result: 'Unauthorized'}); }
 });
 
 router.post('/signup', async (req, res) => {

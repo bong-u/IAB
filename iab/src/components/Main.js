@@ -57,7 +57,7 @@ const Main = () => {
             <Route path="" element={<Home />} />
             <Route path="asset" element={<Asset token={token} assetList={assetList} assetColorList={assetColorList} />} />
             <Route path="stats" element={<Stats />} />
-            <Route path="add" element={<Add assetList={assetList} expenseTypeList={expenseTypeList} />} />
+            <Route path="add" element={<Add token={token} assetList={assetList} expenseTypeList={expenseTypeList} />} />
           </Routes>
         </section>
       </main>

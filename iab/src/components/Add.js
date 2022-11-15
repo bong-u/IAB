@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
-const Add = ({ assetList, expenseTypeList }) => {
+const Add = ({ token, assetList, expenseTypeList }) => {
   // 오늘 날짜를 placeholder로 설정
   const todayDate = new Date().toISOString().substring(0, 10);
 
   // form의 values
-  const [type, setType] = useState('0');
+  const [type, setType] = useState(0);
   const [asset, setAsset] = useState(0);
   const [expense, setExpense] = useState(0);
-  const [date, setDate] = useState(0);
+  const [date, setDate] = useState(todayDate);
+  const [money, setMoney] = useState(0);
   const [content, setContent] = useState(0);
 
   // update state
@@ -24,17 +25,19 @@ const Add = ({ assetList, expenseTypeList }) => {
     setExpense(parseInt(target.getAttribute('value')));
   };
   const handleDate = ({ target: { value } }) => setDate(value);
-  const handleMoney = ({ target: { value } }) => setDate(value);
+  const handleMoney = ({ target: { value } }) => setMoney(parseInt(value));
   const handleContent = ({ target: { value } }) => setContent(value);
 
-  // 출력만 수행, 서버에 post요청은 아직 구현X
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(type, asset, expense, date, content);
+    console.log(type, asset, expense, date, money, content);
     fetch('http://localhost:3001/transaction', {
       method: 'POST',
-      headers: { 'Content-type': 'application/json'},
-      body: JSON.stringify({ type: type, asset: asset, expense: expense, date: date, content })
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ type: type, asset: asset, expense: expense, date: date, money:money, content:content })
     })
       .then(res => res.json())
       .then(data => {

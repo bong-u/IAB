@@ -25,9 +25,25 @@ exports.getAsset = async (user_id) => {
 
 exports.addAsset = async (user_id, item) => {
     console.log (item);
-    
     const query = `insert into asset(name, type, money, color, user_id) values
-        ('${item.name}', ${item.type}, ${item.money}, ${item.color}, ${user_id})`;
+    ('${item.name}', ${item.type}, ${item.money}, ${item.color}, ${user_id})`;
+
+    db.serialize();
+    return new Promise(function(resolve, reject){
+        db.each(query, function(err){
+            if (err) {
+                console.error(err);
+                return err;
+            }
+            resolve(item);
+         });
+    });
+};
+
+exports.addTransaction = async (user_id, item) => {
+    console.log (item);
+    const query = `insert into transaction_history(type, asset_id, expense_type, date, money, content) values
+        ('${item.type}', ${item.asset}, ${item.expense}, ${item.date}, ${item.money}, '${item.content}')`;
     
     db.serialize();
     return new Promise(function(resolve, reject){
@@ -37,6 +53,25 @@ exports.addAsset = async (user_id, item) => {
                 return err;
             }
             resolve(item);
+         });
+    });
+}
+
+exports.getTransaction = async (user_id) => {
+    const query = `select * from asset where user_id = ${user_id}`;
+    
+    db.serialize();
+    return new Promise(function(resolve, reject){
+        db.all(query, function(err, rows){
+            if (err) {
+                console.error(err);
+                return err;
+            }
+            rows.forEach((item) => {
+                item.type = ASSET_TYPE[item.type];
+                item.color = ASSET_COLOR[item.color];
+            });
+            resolve(rows);
          });
     });
 };
