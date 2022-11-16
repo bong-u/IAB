@@ -9,13 +9,15 @@ from decouple import config
 isDebug = config('DEBUG', cast=bool)
 
 app = FastAPI()
+from routers import router
 
 # app.mount('/build', StaticFiles(directory='frontend/public/build'), name='static')
-# app.include_router(rest.router)
+
+app.include_router(router.router)
 
 @app.get('/')
 def render(request: Request):
     return 'it works!'
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', host='0.0.0.0', port=8001, debug=isDebug)
+    uvicorn.run('main:app', host='0.0.0.0', port=8001, reload=isDebug)
