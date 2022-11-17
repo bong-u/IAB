@@ -1,19 +1,21 @@
 import uvicorn
-
 from fastapi import FastAPI, Request
-# from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
-# from backend.routers import rest
+from routers import router
 
 isDebug = config('DEBUG', cast=bool)
-
 app = FastAPI()
-from routers import router
 
 # app.mount('/build', StaticFiles(directory='frontend/public/build'), name='static')
 
 app.include_router(router.router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000'],
+    allow_credentials=True,
+    allow_methods=['*'],
+)
 
 @app.get('/')
 def render(request: Request):
