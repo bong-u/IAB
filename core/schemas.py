@@ -1,16 +1,14 @@
-from typing import Any, List, Optional
-
-from pydantic import BaseModel
-from pydantic.utils import GetterDict
+from pydantic import BaseModel, constr
+from typing import List
 
 class Asset(BaseModel):
     pass
 
 class UserBase(BaseModel):
-    username: str
+    username: constr(regex='^[a-z0-9_-]{3,16}$')
 
 class UserCreate(UserBase):
-    password: str
+    password: constr(regex='^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$')
 
 class User(UserBase):
     id: int
