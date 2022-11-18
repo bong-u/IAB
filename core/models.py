@@ -7,7 +7,7 @@ class User(Base):
 
     __tablename__ = 'user'
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String)
     password = Column(String)
 
@@ -17,7 +17,7 @@ class Asset(Base):
     
     __tablename__ = 'asset'
     
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
     type = Column(Integer)
     balance = Column(Integer)
@@ -31,7 +31,7 @@ class Transaction(Base):
 
     __tablename__ = 'transaction'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     type = Column(Integer)
     expense_type = Column(Integer)
     date = Column(Date)
