@@ -53,7 +53,7 @@ const Login = () => {
       .then(async res => {
         const data = await res.json();
         if (res.status === 200) {
-          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('token', data.access_token);
           navigate('/');
         } else {
           alert (data.detail);
