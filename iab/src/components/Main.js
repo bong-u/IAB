@@ -13,6 +13,7 @@ import '../App.css'
 const Main = () => {
   const [assetList, setAssetList] = useState([]);
   const [assetColorList, setAssetColorList] = useState([]);
+  const [incomeTypeList, setIncomeTypeList] = useState([]);
   const [expenseTypeList, setExpenseTypeList] = useState([]);
   const sessionStorage = window.sessionStorage;
   const navigate = useNavigate();
@@ -37,10 +38,12 @@ const Main = () => {
         const data = await res.json();
         if (res.status === 200) {
           setAssetList(data['asset_list']);
-          // setExpenseTypeList(data['expense_type_list']);
+          setIncomeTypeList(data['income_type_list'].split(','));
+          setExpenseTypeList(data['expense_type_list'].split(','));
         } else {
           console.log(data);
           alert ('데이터를 가져오는데 실패했습니다.');
+          logoutFunc(); //to refresh token
         }
       });
     }

@@ -22,6 +22,8 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     assets: List[Asset] = []
+    income_type: str
+    expense_type: str
 
     class Config:
         orm_mode = True

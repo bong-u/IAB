@@ -11,6 +11,8 @@ class User(Base):
     username = Column(String)
     password = Column(String)
 
+    income_type = Column(String, default='월급, 용돈, 이자')
+    expense_type= Column(String, default='식비,교통비,공과금')
     assets = relationship('Asset', back_populates='user')
 
 class Asset(Base):
