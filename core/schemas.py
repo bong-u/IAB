@@ -1,14 +1,23 @@
 from pydantic import BaseModel, constr
 from typing import List
 
-class Asset(BaseModel):
-    pass
+class AssetBase(BaseModel): 
+    name : str
+    type : int
+    balance : int
+    color : int
+
+class Asset(AssetBase):
+    id : int
+    user_id : int
+    class Config:
+        orm_mode = True
 
 class UserBase(BaseModel):
     username: constr(regex='^[a-z0-9_-]{3,16}$')
 
 class UserCreate(UserBase):
-    password: constr(regex='^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$')
+    password: constr(regex='^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$')
 
 class User(UserBase):
     id: int
