@@ -25,6 +25,7 @@ const Main = () => {
 
   // 필요한 정보를 한번에 받아서 하위 컴포넌트에 props로 전달
   useEffect(() => {
+    setAssetColorList(['#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD']);
     if (token === null)
       navigate('/login');
     else {
@@ -35,12 +36,10 @@ const Main = () => {
       .then(async res => {
         const data = await res.json();
         if (res.status === 200) {
-          console.log(data)
           setAssetList(data['asset_list']);
-          // setAssetColorList(data['asset_color_list']);
           // setExpenseTypeList(data['expense_type_list']);
         } else {
-          console.log(res);
+          console.log(data);
           alert ('데이터를 가져오는데 실패했습니다.');
         }
       });
