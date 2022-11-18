@@ -1,29 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const sessionStorage = window.sessionStorage;
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();  
   const navigate = useNavigate();
-
-  const handleId = ({ target: { value } }) => setId(value);
-  const handlePw = ({ target: { value } }) => setPw(value);
 
   useEffect(() => {
     if (sessionStorage.getItem('user') !== null)
       navigate('/');
   }, [sessionStorage, navigate]);
 
-  const validate = () => {
+  const validate = (formData) => {
     const idRegex =  /^[a-z0-9_-]{3,16}$/;
     const pwRegex = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$/;
 
-    if (!idRegex.test(id)) {
+    if (!idRegex.test(formData.get('username'))) {
       alert('3-16자리의 사용자 이름을 입력해주시기 바랍니다.');
       return false;
     }
-    if (!pwRegex.test(pw)) {
+    if (!pwRegex.test(formData.get('password'))) {
       alert('8-16자리이고 문자, 숫자, 특수문자 조합의 비밀번호를 입력해주시기 바랍니다.');
       return false;
     }
@@ -31,11 +26,11 @@ const Login = () => {
   }
 
   const handleSignup = () => {
-    if (validate()) {
+    const formData = new FormData(document.getElementById('loginForm'));
+    if (validate(formData)) {
       fetch('http://localhost:8001/signup', {
         method: 'POST',
-        headers: { 'accept':'application/json', 'Content-type': 'application/json'},
-        body: JSON.stringify({ username: id, password: pw})
+        body: formData
       })
         .then(async res => {
           const data = await res.json();
@@ -50,10 +45,10 @@ const Login = () => {
   };
 
   const handleLogin = () => {
+    const formData = new FormData(document.getElementById('loginForm'));
     fetch('http://localhost:8001/login', {
       method: 'POST',
-      headers: { 'accept':'application/json', 'Content-type': 'application/json'},
-      body: JSON.stringify({ username: id, password: pw})
+      body: formData
     })
       .then(async res => {
         const data = await res.json();
@@ -72,14 +67,14 @@ const Login = () => {
         <h1>한눈에가계부</h1>
       </header>
       <section className="d-flex justify-content-center">
-        <form> 
+        <form id="loginForm"> 
           <div className="my-4 form-floating">
-            <input type="text" className="form-control" onChange={handleId} placeholder="username" />
+            <input type="text" className="form-control" name="username" placeholder="username" />
             <label>Username</label>
           </div>
           <div className="my-4 form-floating">
-            <input type="password" className="form-control" onChange={handlePw} placeholder="password" autoComplete="on"/>
-            <label >Password</label>
+            <input type="password" className="form-control" name="password" placeholder="password" autoComplete="on"/>
+            <label>Password</label>
           </div>
 
           <div className="d-flex justify-content-between gap-3">

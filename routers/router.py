@@ -42,8 +42,6 @@ async def get_current_user(token : str = Depends(oauth2_scheme), db: Session = D
 
 @router.post("/login/", response_model=schemas.Token)
 async def login (user_info: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-# async def login (user_info: schemas.UserCreate, db: Session = Depends(get_db)):
-    print (user_info.password)
     user = crud.auth_user(db, user_info.username, user_info.password)
     if not user:
         raise HTTPException(
@@ -55,18 +53,16 @@ async def login (user_info: OAuth2PasswordRequestForm = Depends(), db: Session =
     return {'access_token': access_token, 'token_type': 'bearer'}
 
 @router.post("/signup/", response_model=schemas.User)
-def signup(user_info: schemas.UserCreate, db: Session = Depends(get_db)):
+def signup(user_info: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = crud.get_user_by_name(db=db, username=user_info.username)
     if user:
         raise HTTPException(status_code=400, detail="Username already registered")
         
     return crud.create_user(db, user=user_info)
 
-@router.get("/users/")
-def users(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+# @router.get("/users/")
 # def users(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    print (user)
-    return crud.get_users(db)
+#     return crud.get_users(db)
 
 @router.get("/asset/")
 def get_assets(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
