@@ -4,13 +4,13 @@ const AddAssetModal = ({ token, assetColorList, closeModal }) => {
   // form의 values
   const [name, setName] = useState();
   const [type, setType] = useState();
-  const [money, setMoney] = useState();
+  const [balance, setBalance] = useState();
   const [color, setColor] = useState(0);
 
   // update state
   const handleName = ({ target: { value } }) => setName(value);
-  const handleType = ({ target: { value } }) => setType(value);
-  const handleMoney = ({ target: { value } }) => setMoney(value);
+  const handleType = ({ target: { value } }) => setType(parseInt(value));
+  const handleBalance = ({ target: { value } }) => setBalance(value);
   const handleColor = ({ target }) => {
     setColor(parseInt(target.getAttribute('value')));
   };
@@ -18,19 +18,24 @@ const AddAssetModal = ({ token, assetColorList, closeModal }) => {
   // submit post
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, type, money, color);
-    fetch('http://localhost:3001/asset', {
+    console.log(name, type, balance, color);
+    fetch('http://localhost:8001/asset', {
       method: 'POST',
       headers: {
         "Authorization": `Bearer ${token}`,
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ name: name, type: type, money: money, color: color })
+      body: JSON.stringify({ name: name, type: type, balance: balance, color: color })
     })
-      .then(res => res.json())
-      .then(data => {
-        alert('자산이 추가되었습니다.');
-        window.location.reload('/');
+      .then(async res => {
+        const data = await res.json();
+        if (res.status === 200) {
+          alert('자산이 추가되었습니다.');
+          window.location.reload();
+        } else {
+          console.log(data);
+          alert ('자산을 추가하는데 실패했습니다');
+        }
       });
   };
   return (
@@ -48,8 +53,8 @@ const AddAssetModal = ({ token, assetColorList, closeModal }) => {
               <option value="1">카드</option>
               <option value="2">간편결제</option>
             </select>
-            {/* money */}
-            <input id="input_money" type="text" onChange={handleMoney} className="form-control" placeholder="금액" required />
+            {/* balance */}
+            <input type="number" onChange={handleBalance} className="form-control" placeholder="금액" required />
             {/* asset */}
             <div className="d-flex w-100 justify-content-center gap-3">
               {assetColorList.map((item, idx) => {
