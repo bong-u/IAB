@@ -5,6 +5,7 @@ from jose import JWTError, jwt
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 ACCESS_TOKEN_REFRESH_MINUTES = 15
+SECRET_KEY = config('SECRET_KEY')
 
 
 def create_access_token(data: dict):
@@ -17,6 +18,6 @@ def create_access_token(data: dict):
         expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_REFRESH_MINUTES)
     
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, config('SECRET_KEY'), algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     
     return encoded_jwt
