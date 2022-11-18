@@ -28,19 +28,22 @@ const Main = () => {
     if (token === null)
       navigate('/login');
     else {
-      fetch('http://localhost:3001', {
-        method: 'POST',
+      fetch('http://localhost:8001', {
+        method: 'GET',
         headers: {"Authorization" : `Bearer ${token}`}
       })
-        .then(res => {
-          if (res.status === 401) logoutFunc();
-          return res.json()
-        })
-        .then(data => {
+      .then(async res => {
+        const data = await res.json();
+        if (res.status === 200) {
+          console.log(data)
           setAssetList(data['asset_list']);
-          setAssetColorList(data['asset_color_list']);
-          setExpenseTypeList(data['expense_type_list']);
-        })
+          // setAssetColorList(data['asset_color_list']);
+          // setExpenseTypeList(data['expense_type_list']);
+        } else {
+          console.log(res);
+          alert ('데이터를 가져오는데 실패했습니다.');
+        }
+      });
     }
   }, [token, navigate, logoutFunc]);
 

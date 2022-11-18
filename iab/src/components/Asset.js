@@ -4,6 +4,7 @@ import AddAssetModal from './AddAssetModal';
 const Asset = ({ token, assetList, assetColorList }) => {
   // modal의 상태 0:hide, 1:show
   const [modalFlag, setModalFlag] = useState(false);
+  const asset_image_name = ['account', 'card', 'payments']
 
   const openModal = () => { setModalFlag(true);   };
   const closeModal = () => { setModalFlag(false); };
@@ -14,7 +15,7 @@ const Asset = ({ token, assetList, assetColorList }) => {
         {assetList.map((asset, idx) => {
           return (
             <div key={asset.name + idx} className="asset-div p-4 text-center shadow" style={{ backgroundColor: asset.color }}>
-              <img className="asset-icon p-1 mb-2" src={`images/${asset.type}.png`} alt="" />
+              <img className="asset-icon p-1 mb-2" src={`images/${asset_image_name[asset.type]}.png`} alt="" />
               <p>{asset.name}</p><p>{asset.money}원</p>
             </div>
           )
