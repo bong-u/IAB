@@ -7,7 +7,7 @@ const Add = ({ token, assetList, expenseTypeList }) => {
   // form의 values
   const [type, setType] = useState(0);
   const [asset, setAsset] = useState(0);
-  const [expense, setExpense] = useState(0);
+  const [category, setCategory] = useState(0);
   const [date, setDate] = useState(todayDate);
   const [money, setMoney] = useState(0);
   const [content, setContent] = useState(0);
@@ -20,28 +20,33 @@ const Add = ({ token, assetList, expenseTypeList }) => {
     const target = e.target.closest('div');
     setAsset(parseInt(target.getAttribute('value')));
   };
-  const handleExpense = (e) => {
+  const handleCategory = (e) => {
     const target = e.target.closest('div');
-    setExpense(parseInt(target.getAttribute('value')));
+    setCategory(parseInt(target.getAttribute('value')));
   };
   const handleDate = ({ target: { value } }) => setDate(value);
   const handleMoney = ({ target: { value } }) => setMoney(parseInt(value));
   const handleContent = ({ target: { value } }) => setContent(value);
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(type, asset, expense, date, money, content);
-    fetch('http://localhost:3001/transaction', {
+    fetch('http://localhost:8001/transaction', {
       method: 'POST',
       headers: {
         "Authorization": `Bearer ${token}`,
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ type: type, asset: asset, expense: expense, date: date, money:money, content:content })
+      body: JSON.stringify({ type: type, asset_id: asset, category: category, date: date, money: money, content: content })
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log (data);
+      .then(async res => {
+        const data = await res.json();
+        if (res.status === 200) {
+          alert('거래내용이 추가되었습니다.');
+          window.location.reload();
+        } else {
+          console.log(data);
+          alert('자산을 추가하는데 실패했습니다');
+        }
       });
   };
 
@@ -75,8 +80,8 @@ const Add = ({ token, assetList, expenseTypeList }) => {
           <div id="select-type" className="d-flex gap-2 flex-wrap p-3 justify-content-center">
             {expenseTypeList.map((item, idx) => {
               return (
-                <div key={item + idx} value={idx} onClick={handleExpense} className="btn select-scale">
-                  <input type="radio" checked={expense === idx} className="btn-check" readOnly />
+                <div key={item + idx} value={idx} onClick={handleCategory} className="btn select-scale">
+                  <input type="radio" checked={category === idx} className="btn-check" readOnly />
                   <span>{item}</span>
                 </div>
               )
