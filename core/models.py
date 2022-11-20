@@ -35,7 +35,7 @@ class Transaction(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     type = Column(Integer)
-    expense_type = Column(Integer)
+    category = Column(Integer)
     date = Column(Date)
     money = Column(Integer)
     content = Column(String)
