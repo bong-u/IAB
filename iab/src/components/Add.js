@@ -36,7 +36,8 @@ const handleSubmit = (e) => {
         "Authorization": `Bearer ${token}`,
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ type: type, asset_id: asset, category: category, date: date, money: money, content: content })
+      // js array의 index는 0부터 시작, sqlalchemy model의 id는 1부터 시작이므로 asset_id에 1더해서 요청한다.
+      body: JSON.stringify({ type: type, asset_id: asset+1, category: category, date: date, money: money, content: content })
     })
       .then(async res => {
         const data = await res.json();
