@@ -1,3 +1,4 @@
+from sqlalchemy import subquery
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from core import models, schemas
@@ -27,8 +28,8 @@ def auth_user(db:Session, username: str, password: str):
 def get_user_by_name(db: Session, username: str):
     return db.query(models.User).filter(models.User.username == username).first()
     
-def get_user_by_id(db:Session, username:str):
-    return db.query(models.User).filter(models.User.id == username).first()
+def get_user_by_id(db:Session, user_id: int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
@@ -50,3 +51,20 @@ def create_asset(db:Session, asset: schemas.AssetBase, user_id : int):
 
 def get_assets(db: Session, user_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Asset).filter(models.Asset.user_id == user_id).offset(skip).limit(limit).all()
+
+def create_transaction(db:Session, item: schemas.TransactionBase):
+    print (type(item.date))
+    db_item = models.Transaction(**item.dict())
+
+    try:
+        db.add(db_item)
+        db.commit()
+        db.refresh(db_item)
+    except Exception as e:
+        return {'status_code' : 400, 'detail':str(e)}
+
+    return db_item
+
+def get_transactions_of_user(db:Session, user_id: int):
+    subquery = db.query(models.Asset.id).filter(models.Asset.user_id == user_id).subquery()
+    return db.query(models.Transaction).filter(models.Transaction.asset_id.in_(subquery)).all()

@@ -1,5 +1,20 @@
 from pydantic import BaseModel, constr
+from datetime import date
 from typing import List
+
+class TransactionBase(BaseModel):
+    type : int
+    category : int
+    date : date
+    money : int
+    content : str
+    asset_id : int
+
+class Transaction(TransactionBase):
+    id : int
+    class Config:
+        orm_mode = True
+
 
 class AssetBase(BaseModel): 
     name : str
