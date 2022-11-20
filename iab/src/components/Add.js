@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Add = ({ token, assetList, expenseTypeList }) => {
+const Add = ({ token, assetList, expenseTypeList, incomeTypeList }) => {
   // 오늘 날짜를 placeholder로 설정
   const todayDate = new Date().toISOString().substring(0, 10);
 
@@ -14,7 +14,7 @@ const Add = ({ token, assetList, expenseTypeList }) => {
 
   // update state
   const typeChange = (e) => {
-    setType(e.target.getAttribute('value'));
+    setType(parseInt(e.target.getAttribute('value')));
   };
   const handleAsset = (e) => {
     const target = e.target.closest('div');
@@ -28,7 +28,7 @@ const Add = ({ token, assetList, expenseTypeList }) => {
   const handleMoney = ({ target: { value } }) => setMoney(parseInt(value));
   const handleContent = ({ target: { value } }) => setContent(value);
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     fetch('http://localhost:8001/transaction', {
       method: 'POST',
@@ -37,7 +37,7 @@ const handleSubmit = (e) => {
         'Content-type': 'application/json'
       },
       // js array의 index는 0부터 시작, sqlalchemy model의 id는 1부터 시작이므로 asset_id에 1더해서 요청한다.
-      body: JSON.stringify({ type: type, asset_id: asset+1, category: category, date: date, money: money, content: content })
+      body: JSON.stringify({ type: type, asset_id: asset + 1, category: category, date: date, money: money, content: content })
     })
       .then(async res => {
         const data = await res.json();
@@ -57,9 +57,9 @@ const handleSubmit = (e) => {
         {/* expense/income switch */}
         <div className="btn-group d-table mx-auto select-bg">
           <input type="radio" checked={type === 0} className="btn-check" readOnly />
-          <span className="btn" value={0} onClick={typeChange}>지출</span>
+          <span className="btn" value="0" onClick={typeChange}>지출</span>
           <input type="radio" checked={type === 1} className="btn-check" readOnly />
-          <span className="btn" value={1} onClick={typeChange}>수입</span>
+          <span className="btn" value="1" onClick={typeChange}>수입</span>
         </div>
         {/* asset */}
         <div className="border">

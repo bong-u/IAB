@@ -2,19 +2,19 @@ import { useState } from 'react';
 
 const Stats = () => {
   // 지출, 수입 switch state
-  const [type, setType] = useState("0");
+  const [type, setType] = useState(0);
   // switch 전환
   const typeChange = (e) => {
-    setType(e.target.getAttribute('va환ue'));
+    setType(parseInt(e.target.getAttribute('value')));
   };
   return (
     <div>
       <div className="d-table mx-auto">
         {/* 지출, 수입 switch */}
         <div className="btn-group mx-auto select-bg">
-          <input type="radio" checked={type === "0"} className="btn-check" readOnly />
+          <input type="radio" checked={type === 0} className="btn-check" readOnly />
           <span className="btn" value="0" onClick={typeChange}>지출</span>
-          <input type="radio" checked={type === "1"} className="btn-check" readOnly />
+          <input type="radio" checked={type === 1} className="btn-check" readOnly />
           <span className="btn" value="1" onClick={typeChange}>수입</span>
         </div>
       </div>
