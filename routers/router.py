@@ -60,16 +60,15 @@ def signup(user_info: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
         
     return crud.create_user(db, user=user_info)
 
-# @router.get('/users/')
-# def users(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-#     return crud.get_users(db)
+@router.get('/users/')
+def users(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    return crud.get_users(db)
 
 @router.get('/')
 def send_data(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     payload = {
         'asset_list' : crud.get_assets(db, user_id=user.id),
-        'income_type_list' : user.income_type,
-        'expense_type_list' : user.expense_type,
+        'category_list' : [user.expense_type, user.income_type],
         'transactions' : crud.get_transactions_of_user(db, user_id=user.id)
     }
     return payload

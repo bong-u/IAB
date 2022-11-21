@@ -13,8 +13,7 @@ import '../App.css'
 const Main = () => {
   const [assetList, setAssetList] = useState([]);
   const [assetColorList, setAssetColorList] = useState([]);
-  const [incomeTypeList, setIncomeTypeList] = useState([]);
-  const [expenseTypeList, setExpenseTypeList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const sessionStorage = window.sessionStorage;
   const navigate = useNavigate();
   const token = sessionStorage.getItem('token');
@@ -37,9 +36,9 @@ const Main = () => {
       .then(async res => {
         const data = await res.json();
         if (res.status === 200) {
+          let arr = []
           setAssetList(data['asset_list']);
-          setIncomeTypeList(data['income_type_list'].split(','));
-          setExpenseTypeList(data['expense_type_list'].split(','));
+          setCategoryList([await data['category_list'][0].split(','), await data['category_list'][1].split(',')]);
         } else {
           console.log(data);
           alert ('데이터를 가져오는데 실패했습니다.');
@@ -62,7 +61,8 @@ const Main = () => {
             <Route path="" element={<Home />} />
             <Route path="asset" element={<Asset token={token} assetList={assetList} assetColorList={assetColorList} />} />
             <Route path="stats" element={<Stats />} />
-            <Route path="add" element={<Add token={token} assetList={assetList} expenseTypeList={expenseTypeList} />} />
+            <Route path="add"
+              element={<Add token={token} assetList={assetList} categoryList={categoryList}/>} />
           </Routes>
         </section>
       </main>

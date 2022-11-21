@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Add = ({ token, assetList, expenseTypeList, incomeTypeList }) => {
+const Add = ({ token, assetList, categoryList}) => {
   // 오늘 날짜를 placeholder로 설정
   const todayDate = new Date().toISOString().substring(0, 10);
 
@@ -14,6 +14,7 @@ const Add = ({ token, assetList, expenseTypeList, incomeTypeList }) => {
 
   // update state
   const typeChange = (e) => {
+    console.log(categoryList);
     setType(parseInt(e.target.getAttribute('value')));
   };
   const handleAsset = (e) => {
@@ -79,14 +80,15 @@ const Add = ({ token, assetList, expenseTypeList, incomeTypeList }) => {
         <div className="border">
           <label className="d-block text-center my-1 fs-5">분류</label>
           <div id="select-type" className="d-flex gap-2 flex-wrap p-3 justify-content-center">
-            {expenseTypeList.map((item, idx) => {
+            { categoryList !== undefined
+            ? categoryList[type].map((item, idx) => {
               return (
                 <div key={item + idx} value={idx} onClick={handleCategory} className="btn select-scale">
                   <input type="radio" checked={category === idx} className="btn-check" readOnly />
                   <span>{item}</span>
                 </div>
               )
-            })}
+            }) : null}  
           </div>
         </div>
       </div>
