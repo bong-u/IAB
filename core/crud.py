@@ -61,6 +61,18 @@ def create_transaction(db:Session, item: schemas.TransactionBase):
         db.refresh(db_item)
     except Exception as e:
         return {'status_code' : 400, 'detail':str(e)}
+    
+    asset = db.query(models.Asset).filter(models.Asset.id == item.asset_id).first()
+
+    try:
+        if item.type == 0: balance = asset.balance - item.money
+        else: balance = asset.balance + item.money
+
+        setattr (asset, 'balance', balance)
+        
+        db.commit()
+    except Exception as e:
+        return {'status_code' : 400, 'detail':str(e)}
 
     return db_item
 
