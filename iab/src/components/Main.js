@@ -55,7 +55,7 @@ const Main = () => {
         <aside id="sidebar" className="col-md-3 col-lg-3 col-xl-2 d-md-block bg-light sidebar collapse px-3 border-end">
           <SideNav></SideNav>
         </aside>
-        <section className="col-sm-12 col-md-9 col-lg-9 col-xl-10 p-5">
+        <section className="h-100 col-sm-12 col-md-9 col-lg-9 col-xl-10 p-5">
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="asset" element={<Asset token={token} assetList={assetList} assetColorList={assetColorList} />} />
