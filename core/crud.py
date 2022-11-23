@@ -1,4 +1,4 @@
-from sqlalchemy import subquery
+from sqlalchemy import subquery, select
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from core import models, schemas
@@ -53,7 +53,6 @@ def get_assets(db: Session, user_id: int, skip: int = 0, limit: int = 100):
     return db.query(models.Asset).filter(models.Asset.user_id == user_id).offset(skip).limit(limit).all()
 
 def create_transaction(db:Session, item: schemas.TransactionBase):
-    print (type(item.date))
     db_item = models.Transaction(**item.dict())
 
     try:
@@ -67,4 +66,7 @@ def create_transaction(db:Session, item: schemas.TransactionBase):
 
 def get_transactions_of_user(db:Session, user_id: int):
     subquery = db.query(models.Asset.id).filter(models.Asset.user_id == user_id).subquery()
-    return db.query(models.Transaction).filter(models.Transaction.asset_id.in_(subquery)).all()
+    return {
+        0: db.query(models.Transaction).filter(models.Transaction.type==0).filter(models.Transaction.asset_id.in_(select(subquery))).all(),
+        1: db.query(models.Transaction).filter(models.Transaction.type==1).filter(models.Transaction.asset_id.in_(select(subquery))).all()
+    }

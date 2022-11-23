@@ -44,7 +44,7 @@ const Add = ({ token, assetList, categoryList}) => {
         const data = await res.json();
         if (res.status === 200) {
           alert('거래내용이 추가되었습니다.');
-          window.location.reload();
+          document.getElementById('add-form').reset();
         } else {
           console.log(data);
           alert('자산을 추가하는데 실패했습니다');

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from core import database, models, schemas, crud, auth
-from typing import Union
+from typing import Dict, List
 from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
@@ -65,10 +65,10 @@ def users(user: schemas.User = Depends(get_current_user), db: Session = Depends(
     return crud.get_users(db)
 
 @router.get('/')
-def send_data(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+def get_data(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     payload = {
         'asset_list' : crud.get_assets(db, user_id=user.id),
-        'category_list' : [user.expense_type, user.income_type],
+        'category_list' : [user.expense_type.split(','), user.income_type.split(',')],
         'transactions' : crud.get_transactions_of_user(db, user_id=user.id)
     }
     return payload
@@ -82,6 +82,15 @@ def new_asset(asset: schemas.AssetBase, user: schemas.User = Depends(get_current
     
     return res
 
+@router.get('/transaction/', response_model=Dict[int, List[schemas.Transaction]])
+def get_transaction(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    res = crud.get_transactions_of_user(db, user_id = user.id)
+
+    if not isinstance(res, dict):
+        raise HTTPException(status_code=res['status_code'], detail=res['detail'])
+    print (res)
+    return res
+
 @router.post('/transaction/', response_model=schemas.Transaction)
 def new_transaction(item: schemas.TransactionBase, user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     res = crud.create_transaction(db, item=item)
@@ -89,4 +98,9 @@ def new_transaction(item: schemas.TransactionBase, user: schemas.User = Depends(
     if not isinstance(res, models.Transaction):
         raise HTTPException(status_code=res['status_code'], detail=res['detail'])
     
+    return res
+
+@router.post('/category/', response_model=List)
+def get_category(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    res = [user.expense_type, user.income_type]
     return res

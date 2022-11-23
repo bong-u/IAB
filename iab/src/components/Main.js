@@ -36,9 +36,8 @@ const Main = () => {
       .then(async res => {
         const data = await res.json();
         if (res.status === 200) {
-          let arr = []
           setAssetList(data['asset_list']);
-          setCategoryList([await data['category_list'][0].split(','), await data['category_list'][1].split(',')]);
+          setCategoryList([data['category_list'][0], data['category_list'][1]]);
         } else {
           console.log(data);
           alert ('데이터를 가져오는데 실패했습니다.');
@@ -60,7 +59,7 @@ const Main = () => {
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="asset" element={<Asset token={token} assetList={assetList} assetColorList={assetColorList} />} />
-            <Route path="stats" element={<Stats />} />
+            <Route path="stats" element={<Stats token={token} categoryList={categoryList} logoutFunc={logoutFunc}/>} />
             <Route path="add"
               element={<Add token={token} assetList={assetList} categoryList={categoryList}/>} />
           </Routes>
