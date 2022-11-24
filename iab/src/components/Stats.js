@@ -12,7 +12,6 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
   // switch 전환
   const typeChange = (e) => {
     setType(parseInt(e.target.getAttribute('value')));
-    console.log(categoryList);
   };
   
   useEffect(() => {
