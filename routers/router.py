@@ -65,11 +65,12 @@ def users(user: schemas.User = Depends(get_current_user), db: Session = Depends(
     return crud.get_users(db)
 
 @router.get('/')
-def get_data(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+def get_data(month: int, date: int, user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     payload = {
         'asset_list' : crud.get_assets(db, user_id=user.id),
         'category_list' : [user.expense_type.split(','), user.income_type.split(',')],
-        'transactions' : crud.get_transactions_of_user(db, user_id=user.id)
+        'transactions' : crud.get_transactions_of_user(db, user_id=user.id),
+        'summary_data' : crud.get_summary_data(db, month, date, user_id=user.id)
     }
     return payload
 
@@ -104,3 +105,8 @@ def new_transaction(item: schemas.TransactionBase, user: schemas.User = Depends(
 def get_category(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     res = [user.expense_type, user.income_type]
     return res
+
+# @router.post('/summary/', response_model=List[List[schemas.Transaction]])
+# def get_summary_data(item: schemas.MonthDate, user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+#     res = crud.get_summary_data(db, item.month, item.date, user_id=user.id)
+#     return res

@@ -1,24 +1,38 @@
-const Home = () => {
-  // 현재 날짜와 달 계산
-  const todayDate = () => { return new Date().getDate(); }
+const Home = ({ monthData, dateData }) => {
+  const todayDate = new Date().getDate();
   // JS에서 달은 0부터 시작
-  const todayMonth = () => { return new Date().getMonth() + 1; }
+  const todayMonth = new Date().getMonth() + 1;
+
   return (
     <div className="row justify-content-around">
       <div className="col-md-5 m-3">
-        <h3 id="this_month_title" className="text-center">{todayMonth()}월</h3>
+        <h3 id="this_month_title" className="text-center">{todayMonth}월</h3>
         <div className="border p-4">
           <table className="table w-100 text-center">
             <tbody id="tbody_month">
+              {monthData.map((item, idx) => {
+                return (
+                  <tr key={'monthData' + idx}>
+                    <td>{item.content}</td><td>{item.money}원</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
       </div>
       <div className="col-md-5 m-3">
-        <h3 id="today_title" className="text-center">{todayDate()}일</h3>
+        <h3 id="today_title" className="text-center">{todayDate}일</h3>
         <div className="border p-4">
           <table className="table w-100 text-center">
             <tbody id="tbody_day">
+              {dateData.map((item, idx) => {
+                return (
+                  <tr key={'dateData' + idx}>
+                    <td>{item.content}</td><td>{item.money}원</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

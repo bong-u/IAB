@@ -35,7 +35,7 @@ class UserCreate(UserBase):
     password: constr(regex='^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$')
 
 class User(UserBase):
-    id: int
+    id: int 
     assets: List[Asset] = []
     income_type: str
     expense_type: str

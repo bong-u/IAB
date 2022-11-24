@@ -1,4 +1,4 @@
-from sqlalchemy import subquery, select
+from sqlalchemy import subquery, select, extract
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from core import models, schemas
@@ -82,3 +82,8 @@ def get_transactions_of_user(db:Session, user_id: int):
         0: db.query(models.Transaction).filter(models.Transaction.type==0).filter(models.Transaction.asset_id.in_(select(subquery))).all(),
         1: db.query(models.Transaction).filter(models.Transaction.type==1).filter(models.Transaction.asset_id.in_(select(subquery))).all()
     }
+
+def get_summary_data(db:Session, month, date, user_id: int):
+    this_month = db.query(models.Transaction).filter(extract('month', models.Transaction.date)==month).all()
+    this_day = db.query(models.Transaction).filter(extract('day', models.Transaction.date)==date).all()
+    return [this_month, this_day]
