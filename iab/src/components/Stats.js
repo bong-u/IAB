@@ -8,12 +8,15 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
   // 지출, 수입 switch state
   const [type, setType] = useState(0);
   const [chartData, setChartData] = useState({});
+
   const navigate = useNavigate();
+  const valueList = Array(categoryList[type].length);
+
   // switch 전환
   const typeChange = (e) => {
     setType(parseInt(e.target.getAttribute('value')));
   };
-  
+
   useEffect(() => {
     if (token === null)
       navigate('/login');
@@ -24,8 +27,6 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
       })
         .then(async res => {
           const data = await res.json();
-          const valueList = Array(categoryList[type].length);
-
           valueList.fill(0);
 
           if (res.status === 200) {
@@ -33,7 +34,7 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
               valueList[item.category] += item.money;
 
             setChartData({
-              labels:categoryList[type],
+              labels: categoryList[type],
               datasets: [{
                 backgroundColor: ['#FFD1D1', '#F9F7CF', '#CCF3EE', '#C8DBBE', '#9ADCFF', '#F0D9FF', '#DDDDDD'],
                 borderColor: '#000000',
@@ -69,16 +70,23 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
         {/* 항목 별 차트 */}
         <div className="col-8 col-sm-7 col-md-6 col-lg-5 col-xl-4 p-3">
           {/* <PieChart/> */}
-          { isFetched===true &&
-            <Pie data={chartData} options={options}/>
+          {isFetched === true &&
+            <Pie data={chartData} options={options} />
           }
         </div>
         <div className="col-4 d-flex align-items-center">
           {/* 세부사항 table */}
           <table className="table text-center">
             <tbody>
-              <tr><td>술값</td><td>5000원</td></tr>
-              <tr><td>식비</td><td>10000원</td></tr>
+              {isFetched === true &&
+                categoryList[type].map((item, idx) => {
+                  return (
+                    <tr key={'data' + idx}>
+                      <td>{item}</td><td>{chartData.datasets[0].data[idx]}원</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
