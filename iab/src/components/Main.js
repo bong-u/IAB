@@ -45,7 +45,6 @@ const Main = () => {
       })
       .then(async res => {
         const data = await res.json();
-        console.log(data['summary_data']);
         if (res.status === 200) {
           setAssetList(data['asset_list']);
           setCategoryList([data['category_list'][0], data['category_list'][1]]);
