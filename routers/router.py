@@ -101,6 +101,15 @@ def new_transaction(item: schemas.TransactionBase, user: schemas.User = Depends(
     
     return res
 
+@router.delete('/transaction/', response_model=schemas.Transaction)
+def delete_transaction(item_id: int, user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    res = crud.delete_transaction(db, item_id=item_id)
+
+    if not isinstance(res, models.Transaction):
+        raise HTTPException(status_code=res['status_code'], detail=res['detail'])
+    
+    return res
+
 @router.post('/category/', response_model=List)
 def get_category(user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
     res = [user.expense_type, user.income_type]

@@ -76,6 +76,18 @@ def create_transaction(db:Session, item: schemas.TransactionBase):
 
     return db_item
 
+def delete_transaction(db:Session, item_id: int):
+    
+    db_item = db.query(models.Transaction).filter(models.Transaction.id == item_id).first()
+    
+    if not db_item:
+        return {'code': 400, 'detail':'Item does not exist'}
+    
+    db.delete(db_item)
+    db.commit()
+    
+    return db_item
+
 def get_transactions_of_user(db:Session, user_id: int):
     subquery = db.query(models.Asset.id).filter(models.Asset.user_id == user_id).subquery()
     return {
