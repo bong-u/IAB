@@ -50,7 +50,7 @@ const Stats = ({ token, categoryList, logoutFunc }) => {
           }
         });
     }
-  }, [token, navigate, logoutFunc, categoryList, type]);
+  }, [token, navigate, logoutFunc, categoryList, type, valueList]);
 
   const options = {
   };
